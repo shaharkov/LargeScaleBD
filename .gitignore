@@ -8,6 +8,3 @@
 
 # OSX / *nix default autosave extension
 *.m~
-
-# Compiled MEX binaries (all platforms)
-*.mex*
