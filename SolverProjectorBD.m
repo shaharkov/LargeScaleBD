@@ -17,10 +17,11 @@ classdef SolverProjectorBD < SolverProjector
         flips;
         minsv;
         maxsv;
+        use_weighted_metric;
     end
     
     methods
-        function obj = SolverProjectorBD(F, V, eqLHS, eqRHS, K, lb, ub, x0, mode)
+        function obj = SolverProjectorBD(F, V, eqLHS, eqRHS, K, lb, ub, x0, mode, use_weighted_metric)
             % setup BD solver
             obj.report(1,'-----------------------------------------------------------------\n');
             obj.report(1,'Constructing SolverProjectorBD (vertices %d,  elements %d)\n', size(V,1), size(F,1));
@@ -30,13 +31,18 @@ classdef SolverProjectorBD < SolverProjector
             obj.eqRHS = eqRHS;
             obj.x0 = x0;
             obj.mode = mode;
+            obj.use_weighted_metric = use_weighted_metric;
             obj.K = K;
             obj.lb = lb;
             obj.ub = ub;
             obj.dim = size(F,2)-1;
             [obj.T,areas] = computeMeshTranformationCoeffsMex(F, V); % compute mapping of vertices to differentials (T)
             weights = kron(sqrt(areas),ones(obj.dim^2,1));
-            obj.W = sparse(1:length(weights),1:length(weights),weights);
+            if use_weighted_metric,
+                obj.W = sparse(1:length(weights),1:length(weights),weights);
+            else
+                obj.W = 1;
+            end
             obj.initSolver(); % initialize
             obj.report(1,'SolverProjectorBD is ready (%.3g secs)\n', toc(t_start));
             obj.report(1,'-----------------------------------------------------------------\n\n');
