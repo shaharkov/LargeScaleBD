@@ -8,6 +8,7 @@
 %% init
 rng(1)
 clear
+addpath('mex');
 
 
 %% parameters
