@@ -1,7 +1,7 @@
 Large-Scale Bounded Distortion Mappings
 ====
 
-A Matlab implementation of the paper ["Large-Scale Bounded Distortion Mappings"](http://www.wisdom.weizmann.ac.il/~shaharko/LargeScaleBD.html).
+A Matlab implementation of the paper ["Large-Scale Bounded Distortion Mappings"](https://shaharkov.github.io/projects/LargeScaleBD_lowRes.pdf).
 
 ----
 The class `SolverProjectorBD.m` implements the algorithm described in the paper for computing bounded-distortion mappings via a Gauss-Newton-like approach.
